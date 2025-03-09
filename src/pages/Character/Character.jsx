@@ -1,10 +1,11 @@
 import './Character.css'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 const Character = () => {
   const { id } = useParams()
   const [character, setCharacter] = useState()
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetch(`https://stranger-things-api.fly.dev/api/v1/characters/${id}`)
@@ -14,6 +15,9 @@ const Character = () => {
 
   return (
     <main className='character'>
+      <button onClick={() => navigate('/characters')} className='back-btn'>
+        ← Characters
+      </button>
       <h2>{character?.name}</h2>
       <div>
         <img src={character?.photo} alt={character?.name} />
