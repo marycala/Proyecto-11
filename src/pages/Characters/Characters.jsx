@@ -9,6 +9,9 @@ const Characters = () => {
   const [characters, setCharacters] = useState([])
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem('favorites')) || []
+  )
 
   useEffect(() => {
     setLoading(true)
@@ -23,17 +26,27 @@ const Characters = () => {
       })
   }, [page])
 
+  const toggleFavorite = (character) => {
+    let updatedFavorites
+    if (favorites.some((fav) => fav._id === character._id)) {
+      updatedFavorites = favorites.filter((fav) => fav._id !== character._id)
+    } else {
+      updatedFavorites = [...favorites, character]
+    }
+    setFavorites(updatedFavorites)
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
+  }
+
   return (
     <main className='characters'>
       {loading && <Loading />}
       {characters.map((character) => (
-        <Link
-          className='character-link'
+        <CharacterCard
           key={character._id}
-          to={`/characters/${character._id}`}
-        >
-          <CharacterCard character={character} />
-        </Link>
+          character={character}
+          isFavorite={favorites.some((fav) => fav._id === character._id)}
+          toggleFavorite={toggleFavorite}
+        />
       ))}
       <Pagination page={page} setPage={setPage} />
     </main>

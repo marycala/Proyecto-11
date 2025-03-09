@@ -42,3 +42,23 @@
     height: 300px;
   }
 }
+
+.favorite {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.favorite-btn {
+  background-color: transparent;
+  border: 1px solid #ffcc00;
+  color: #ffcc00;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.favorite-btn.active {
+  background-color: #ffcc00;
+  color: #000;
+}
