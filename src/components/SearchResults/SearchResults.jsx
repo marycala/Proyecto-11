@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import CharacterCard from '../../components/CharacterCard/CharacterCard'
+import CharacterCard from '../CharacterCard/CharacterCard'
 import './SearchResults.css'
-import Loading from '../../components/Loading/Loading'
+import Loading from '../Loading/Loading'
 
 const SearchResults = () => {
   const { keyword } = useParams()

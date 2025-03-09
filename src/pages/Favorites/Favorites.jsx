@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import CharacterCard from '../CharacterCard/CharacterCard'
+import CharacterCard from '../../components/CharacterCard/CharacterCard'
 import './Favorites.css'
 
 const Favorites = () => {
