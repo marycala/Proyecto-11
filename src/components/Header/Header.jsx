@@ -1,30 +1,25 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import './Header.css'
 
 const Header = () => {
-  const [keyword, setKeyword] = useState('')
+  const { register, handleSubmit, reset } = useForm()
   const navigate = useNavigate()
 
-  const handleChange = (event) => {
-    setKeyword(event.target.value)
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
+  const onSubmit = ({ keyword }) => {
     if (keyword.trim() !== '') {
       navigate(`/search/${encodeURIComponent(keyword)}`)
+      reset()
     }
   }
 
   return (
     <header>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <input
+          {...register('keyword')}
           placeholder='Search by name'
-          onChange={handleChange}
           type='text'
-          value={keyword}
         />
         <button type='submit'>🔍</button>
       </form>
