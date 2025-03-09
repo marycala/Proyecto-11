@@ -1,8 +1,6 @@
 import './CharacterCard.css'
 
 const CharacterCard = ({ character, isFavorite, toggleFavorite }) => {
-  if (!character?.photo) return null
-
   return (
     character.photo && (
       <div className='character-card'>
@@ -10,7 +8,7 @@ const CharacterCard = ({ character, isFavorite, toggleFavorite }) => {
           <h2>{character.name}</h2>
         </div>
         <div className='img-wrp'>
-          <img src={character.photo} alt={character.name} />)
+          <img src={character.photo} alt={character.name} />
         </div>
         <div className='favorite'>
           <button
