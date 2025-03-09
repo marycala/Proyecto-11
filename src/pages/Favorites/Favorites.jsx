@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import CharacterCard from '../../components/CharacterCard/CharacterCard'
 import './Favorites.css'
+import { useNavigate } from 'react-router-dom'
 
 const Favorites = () => {
+  const navigate = useNavigate()
   const [favorites, setFavorites] = useState([])
 
   useEffect(() => {
@@ -20,6 +22,9 @@ const Favorites = () => {
 
   return (
     <main className='favorites'>
+      <button onClick={() => navigate('/')} className='back-btn'>
+        ← Home
+      </button>
       <h2>My Favorites Characters</h2>
       {favorites.length === 0 ? (
         <p>No favorites yet</p>
