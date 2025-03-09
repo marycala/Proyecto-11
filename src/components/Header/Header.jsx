@@ -1,24 +1,33 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import './Header.css'
 import { useState } from 'react'
+import './Header.css'
 
 const Header = () => {
   const [keyword, setKeyword] = useState('')
   const navigate = useNavigate()
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    if (keyword.trim()) {
-      navigate(`/search/${keyword}`)
-    }
-  }
-
   const handleChange = (event) => {
     setKeyword(event.target.value)
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    if (keyword.trim() !== '') {
+      navigate(`/search/${encodeURIComponent(keyword)}`)
+    }
+  }
+
   return (
     <header>
+      <form onSubmit={handleSubmit}>
+        <input
+          placeholder='Search by name'
+          onChange={handleChange}
+          type='text'
+          value={keyword}
+        />
+        <button type='submit'>🔍</button>
+      </form>
       <nav>
         <ul>
           <li>
@@ -32,14 +41,6 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder='Search by name'
-          onChange={handleChange}
-          type='text'
-          value={keyword}
-        />
-      </form>
     </header>
   )
 }
