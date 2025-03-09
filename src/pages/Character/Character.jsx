@@ -7,7 +7,7 @@ const Character = () => {
   const [character, setCharacter] = useState()
 
   useEffect(() => {
-    fetch(`https://stranger-things-api.fly.dev/api/v1/characters/${id}`)
+    fetch(`https://stranger-things-api.fly.dev/api/v1/character/${id}`)
       .then((res) => res.json())
       .then((res) => setCharacter(res))
   }, [])
