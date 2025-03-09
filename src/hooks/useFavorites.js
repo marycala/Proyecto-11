@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from 'react'
+import useLocalStorage from './useLocalStorage'
 
 const favoritesReducer = (state, action) => {
   switch (action.type) {
@@ -12,14 +12,12 @@ const favoritesReducer = (state, action) => {
 }
 
 const useFavorites = () => {
-  const [favorites, dispatch] = useReducer(
-    favoritesReducer,
-    JSON.parse(localStorage.getItem('favorites')) || []
-  )
+  const [favorites, setFavorites] = useLocalStorage('favorites', [])
 
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites))
-  }, [favorites])
+  const dispatch = (action) => {
+    const newState = favoritesReducer(favorites, action)
+    setFavorites(newState)
+  }
 
   const toggleFavorite = (character) => {
     if (favorites.some((fav) => fav._id === character._id)) {
