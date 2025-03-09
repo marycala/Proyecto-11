@@ -3,8 +3,10 @@ import Loading from '../../components/Loading/Loading'
 import React, { useEffect, useState } from 'react'
 import CharacterCard from '../../components/CharacterCard/CharacterCard'
 import Pagination from '../../components/Pagination/Pagination'
+import { useNavigate } from 'react-router-dom'
 
 const Characters = () => {
+  const navigate = useNavigate()
   const [characters, setCharacters] = useState([])
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
@@ -38,6 +40,10 @@ const Characters = () => {
 
   return (
     <main className='characters'>
+      <button onClick={() => navigate('/')} className='back-btn'>
+        ← Home
+      </button>
+
       {loading && <Loading />}
       {characters.map((character) => (
         <CharacterCard
