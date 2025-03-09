@@ -3,7 +3,6 @@ import Loading from '../../components/Loading/Loading'
 import React, { useEffect, useState } from 'react'
 import CharacterCard from '../../components/CharacterCard/CharacterCard'
 import Pagination from '../../components/Pagination/Pagination'
-import { Link } from 'react-router-dom'
 
 const Characters = () => {
   const [characters, setCharacters] = useState([])
