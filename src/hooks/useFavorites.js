@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import useLocalStorage from './useLocalStorage'
 
 const favoritesReducer = (state, action) => {
@@ -14,18 +15,24 @@ const favoritesReducer = (state, action) => {
 const useFavorites = () => {
   const [favorites, setFavorites] = useLocalStorage('favorites', [])
 
-  const dispatch = (action) => {
-    const newState = favoritesReducer(favorites, action)
-    setFavorites(newState)
-  }
+  const dispatch = useCallback(
+    (action) => {
+      setFavorites((prevState) => favoritesReducer(prevState, action))
+    },
+    [setFavorites]
+  )
 
-  const toggleFavorite = (character) => {
-    if (favorites.some((fav) => fav._id === character._id)) {
-      dispatch({ type: 'REMOVE_FAVORITE', payload: character._id })
-    } else {
-      dispatch({ type: 'ADD_FAVORITE', payload: character })
-    }
-  }
+  const toggleFavorite = useCallback(
+    (character) => {
+      dispatch({
+        type: favorites.some((fav) => fav._id === character._id)
+          ? 'REMOVE_FAVORITE'
+          : 'ADD_FAVORITE',
+        payload: character._id
+      })
+    },
+    [favorites, dispatch]
+  )
 
   return { favorites, toggleFavorite }
 }

@@ -1,6 +1,7 @@
+import { memo } from 'react'
 import './CharacterCard.css'
 
-const CharacterCard = ({ character, isFavorite, toggleFavorite }) => {
+const CharacterCard = memo(({ character, isFavorite, toggleFavorite }) => {
   return (
     character.photo && (
       <div className='character-card'>
@@ -24,6 +25,6 @@ const CharacterCard = ({ character, isFavorite, toggleFavorite }) => {
       </div>
     )
   )
-}
+})
 
 export default CharacterCard

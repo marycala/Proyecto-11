@@ -13,7 +13,10 @@ const useLocalStorage = (key, initialValue) => {
 
   useEffect(() => {
     try {
-      localStorage.setItem(key, JSON.stringify(storedValue))
+      const currentValue = JSON.stringify(storedValue)
+      if (localStorage.getItem(key) !== currentValue) {
+        localStorage.setItem(key, currentValue)
+      }
     } catch (error) {
       console.error('Error saving to localStorage:', key, error)
     }
